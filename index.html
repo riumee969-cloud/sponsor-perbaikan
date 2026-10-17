@@ -1,0 +1,352 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Sponsorship Aresta</title>
+<link rel="icon" type="image/png" sizes="512x512" href="./favicon%20(1)-aresta.png">
+<link rel="apple-touch-icon" href="./favicon-aresta%20(1).png">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<style>
+:root{--navy:#101b31;--navy2:#172844;--gold:#d9a441;--gold2:#f2c66d;--bg:#f4f6fa;--ink:#202b3d;--muted:#6b778c;--line:#dce2eb;--white:#fff;--success:#e7f7ef;--danger:#fff0ef}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:radial-gradient(ellipse at top left,#e9eef7 0,transparent 40%),var(--bg);font:15px/1.5 Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",Arial,sans-serif;color:var(--ink)}
+.wrap{max-width:1160px;margin:36px auto;padding:0 20px}.formcard{max-width:850px;margin:32px auto 54px}.card{background:var(--white);border:1px solid rgba(16,27,49,.07);border-radius:22px;padding:30px;box-shadow:0 18px 55px rgba(16,27,49,.08)}
+.brandbar{display:flex;align-items:center;gap:16px;padding:4px 0 22px}.brandlogo{width:76px;height:82px;object-fit:contain;flex:0 0 auto;filter:drop-shadow(0 5px 10px rgba(16,27,49,.12))}.brandname{font-size:13px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);font-weight:800}.brandtitle{font-size:clamp(25px,4vw,36px);line-height:1.15;letter-spacing:-.035em;color:var(--navy);font-weight:850;margin:4px 0 7px}.branddesc{color:var(--muted);margin:0;max-width:560px}.yearpill{display:inline-flex;align-items:center;gap:7px;border-radius:999px;background:#fff5df;border:1px solid #f1dfb4;color:#79531b;font-size:12px;font-weight:800;letter-spacing:.06em;padding:7px 11px;margin-top:12px}
+.formintro{background:linear-gradient(130deg,var(--navy),#21375b);border-radius:17px;color:#fff;padding:20px 22px;margin-bottom:25px;display:flex;align-items:center;gap:15px}.introicon{display:grid;place-items:center;width:44px;height:44px;border-radius:13px;background:rgba(242,198,109,.16);border:1px solid rgba(242,198,109,.34);color:var(--gold2);font-size:22px;flex:0 0 auto}.formintro strong{display:block;font-size:16px;margin-bottom:3px}.formintro span{font-size:13px;color:#d5deed}
+.formsection{margin-top:27px;padding-top:22px;border-top:1px solid #edf0f5}.sectionhead{display:flex;gap:12px;align-items:center;margin-bottom:12px}.sectionnum{width:34px;height:34px;display:grid;place-items:center;border-radius:11px;background:#fff4dc;color:#895f19;font-weight:900}.sectiontitle{font-size:16px;color:var(--navy);font-weight:800}.sectionnote{font-size:12px;color:var(--muted);margin-top:2px}label{display:block;font-size:13px;font-weight:750;color:#344158;margin:17px 0 7px}input,select,textarea{width:100%;min-height:47px;border:1px solid #d5dce7;border-radius:11px;padding:12px 14px;background:#fff;font:inherit;font-size:14px;color:var(--ink);outline:none;transition:border-color .18s,box-shadow .18s}input::placeholder,textarea::placeholder{color:#9aa4b4}input:focus,select:focus,textarea:focus{border-color:#c39439;box-shadow:0 0 0 4px rgba(217,164,65,.15)}textarea{min-height:105px;resize:vertical}input[type=file]{padding:9px;background:transparent;border:0;min-height:36px}input[type=file]::file-selector-button{border:0;border-radius:8px;background:#e9edf4;color:#24324a;padding:9px 12px;margin-right:10px;font-weight:700;cursor:pointer}.filebox{border:1px dashed #c8d0dd;padding:12px 14px;border-radius:13px;background:#f8fafc}.hint,.small{font-size:12px;color:var(--muted);margin-top:7px}.filehint{display:flex;gap:9px;align-items:flex-start;color:#66748a;font-size:12px;margin-top:4px}.filehint b{color:#344158}.btn{border:0;border-radius:11px;padding:13px 18px;background:linear-gradient(135deg,#c58b2d,var(--gold2));color:#172238;font:inherit;font-weight:850;cursor:pointer;transition:transform .15s,filter .15s;box-shadow:0 5px 14px rgba(182,126,34,.18)}.btn:hover{filter:brightness(1.03);transform:translateY(-1px)}.btn:disabled{opacity:.6;cursor:wait;transform:none}.secondary{background:#edf1f6;color:#2f3b50;box-shadow:none}.danger{background:#a83232;color:white;box-shadow:none}.actions{display:flex;gap:11px;flex-wrap:wrap;margin-top:25px}.actions .btn{flex:1;min-width:180px}.hidden{display:none!important}.status{padding:13px 15px;border-radius:11px;margin:16px 0;background:#e8f4ff;color:#174f80;border:1px solid #d2e9ff;overflow-wrap:anywhere}.error{background:#fff0ef;color:#9e2b27;border-color:#ffd6d2}.footnote{text-align:center;font-size:12px;color:#8791a2;margin:18px 0 0}.footnote strong{color:#5b6577}
+.hero{background:linear-gradient(125deg,var(--navy),#253d63);color:white;border-radius:20px;padding:26px 30px;margin-bottom:20px;display:flex;align-items:center;gap:18px}.hero .brandlogo{width:68px;height:72px}.hero h1{font-size:clamp(22px,3vw,30px);margin:0 0 5px;letter-spacing:-.025em}.hero p,.hero div{color:#d7e0ee;margin:0}.hero h2{font-size:22px;color:var(--navy);margin:0 0 8px}.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:18px 0}.stat{background:white;border:1px solid #e5eaf1;padding:20px;border-radius:16px;box-shadow:0 6px 18px rgba(16,27,49,.035)}.stat span{color:var(--muted);font-size:13px}.stat strong{display:block;color:var(--navy);font-size:25px;margin-top:6px;overflow-wrap:anywhere}.toolbar{display:flex;gap:9px;margin-bottom:15px;flex-wrap:wrap}.toolbar input{flex:1;min-width:220px}.tablewrap{overflow:auto;border:1px solid #e8edf3;border-radius:12px}table{width:100%;border-collapse:collapse;white-space:nowrap;font-size:12px;background:#fff}th,td{text-align:left;padding:12px;border-bottom:1px solid #edf0f5}th{background:#f5f7fa;color:#344158;font-weight:800}tbody tr:hover{background:#fbfcfe}a{color:#9b6a19;font-weight:700}
+ .status-badge{display:inline-block;padding:5px 9px;border-radius:999px;font-size:11px;font-weight:850;letter-spacing:.02em}.badge-pending{background:#fff4d9;color:#855b12}.badge-paid{background:#e2f7eb;color:#17653b}.badge-failed{background:#ffe7e5;color:#a12b25}.badge-expired{background:#edf0f5;color:#5b6577}.status-select{min-width:145px;min-height:38px;padding:7px 9px;font-size:12px}.save-status{padding:8px 10px;font-size:12px;margin-top:6px;box-shadow:none}.toolbar select{flex:0 1 220px}
+@media(max-width:700px){.wrap{margin:18px auto;padding:0 12px}.formcard{margin-top:18px}.card{padding:20px;border-radius:17px}.brandbar{align-items:flex-start;gap:12px}.brandlogo{width:58px;height:68px}.brandtitle{font-size:26px}.formintro{padding:16px;align-items:flex-start}.formsection{margin-top:22px;padding-top:18px}.actions{flex-direction:column}.actions .btn{width:100%}.stats{grid-template-columns:1fr}.hero{padding:20px;border-radius:16px;align-items:flex-start}.hero .brandlogo{width:52px;height:60px}.toolbar{flex-direction:column}.toolbar input,.toolbar select{min-width:0;max-width:none!important;width:100%}.stat strong{font-size:22px}}
+</style>
+</head>
+<body>
+<section id="publicPage" class="wrap formcard">
+ <div class="card">
+  <header class="brandbar">
+   <img class="brandlogo" src="./favicon-aresta%20(1).png" alt="Logo Aresta 2026">
+   <div><div class="brandname">Formulir Resmi · Aresta</div><h1 class="brandtitle">Sponsorship Aresta 2026</h1><p class="branddesc">Mari berkolaborasi untuk menghadirkan kegiatan yang berdampak dan berkesan.</p><span class="yearpill">✦ AGENDA KELAS AKHIR 2026</span></div>
+  </header>
+  <div class="formintro"><div class="introicon">✦</div><div><strong>Formulir Pendataan Sponsor</strong><span>Lengkapi informasi di bawah ini. Kolom bertanda * wajib diisi. Pastikan data dan dokumen yang dikirim sudah benar.</span></div></div>
+  <form id="sponsorForm">
+   <div class="formsection" style="margin-top:0;padding-top:0;border-top:0"><div class="sectionhead"><span class="sectionnum">01</span><div><div class="sectiontitle">Informasi Sponsor</div><div class="sectionnote">Data perusahaan atau pihak yang memberikan dukungan.</div></div></div>
+   <label>Nama Sponsor / Perusahaan *</label><input name="company" required maxlength="200" placeholder="Contoh: PT Nama Perusahaan">
+   <label>Nama Penanggung Jawab *</label><input name="contact" required maxlength="200" placeholder="Nama lengkap penanggung jawab">
+   <label>Nomor Telepon / WhatsApp *</label><input name="phone" required maxlength="50" type="tel" autocomplete="tel" placeholder="Contoh: 08xxxxxxxxxx">
+   <label>Email</label><input name="email" type="email" maxlength="200" autocomplete="email" placeholder="namaperusahaan@gmail.com"></div>
+   <div class="formsection"><div class="sectionhead"><span class="sectionnum">02</span><div><div class="sectiontitle">Detail Sponsorship</div><div class="sectionnote">Pilih paket dan masukkan nominal dukungan.</div></div></div>
+   <label>Paket Sponsorship *</label><select name="package_name" required><option value="">--Pilih paket sponsorship--</option><option>Bronze</option><option>Silver</option><option>Gold</option><option>Platinum</option><option>Titanium</option><option>Diamond</option></select>
+   <label>Nominal Sponsorship (Rp) *</label><input name="amount" required inputmode="numeric" placeholder="Contoh: 1000000"><div class="hint">Masukkan nominal dalam angka, tanpa perlu mengetik “Rp”.</div></div>
+   
+<!-- INFORMASI PEMBAYARAN ARESTA -->
+<div class="payment-card">
+  <h3>💳 Pembayaran Sponsorship</h3>
+  <p>
+    Silakan transfer sesuai nominal sponsorship yang
+    telah diisi, kemudian unggah bukti pembayaran.
+  </p>
+
+  <div class="payment-method">
+    <h4>🏦 Transfer Bank</h4>
+
+    <p>Bank: <strong id="bankName">Bank BCA</strong></p>
+
+    <p>
+      Nomor rekening:
+      <strong id="accountNumber">2313035701</strong>
+    </p>
+
+    <p>
+      Atas nama:
+      <strong id="accountOwner">Reifan Fadhillah Koswara</strong>
+    </p>
+
+    <button type="button" class="btn"
+      onclick="copyAccountNumber()">
+      Salin Nomor Rekening
+    </button>
+  </div>
+
+  <div class="payment-method">
+    <h4>📱 Pembayaran Langsung</h4>
+
+    <p>
+      Langsung Prima Alamat Pondok Pesantren Darussalam Kasomalang Subang Kec. 
+  Kasomalang Wetan Kab. Subang Prov. Jawa Barat
+    </p>
+
+    <img
+      src="./qris-aresta.png"
+      alt="QRIS Pembayaran Sponsorship ARESTA"
+      class="qris-image"
+      onerror="this.style.display='none'"
+    />
+
+    <p class="hint">
+      Pastikan nama merchant dan nominal pembayaran
+      sudah benar sebelum membayar.
+    </p>
+  </div>
+
+  <div id="copyMessage" class="hint"></div>
+</div>
+
+<style>
+.payment-card {
+  margin: 18px 0;
+  padding: 18px;
+  border: 1px solid #d7dee7;
+  border-radius: 12px;
+  background: #f8fafc;
+}
+
+.payment-card h3 {
+  margin-top: 0;
+  color: #11796f;
+}
+
+.payment-method {
+  margin-top: 16px;
+  padding: 15px;
+  border-radius: 9px;
+  background: white;
+  border: 1px solid #e2e8f0;
+  overflow-wrap: anywhere;
+}
+
+.payment-method h4 {
+  margin: 0 0 12px;
+}
+
+.qris-image {
+  display: block;
+  width: 100%;
+  max-width: 280px;
+  height: auto;
+  margin: 12px auto;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+}
+
+#copyMessage {
+  margin-top: 10px;
+}
+</style>
+
+<script>
+function copyAccountNumber() {
+  const number = document
+    .getElementById("accountNumber")
+    .textContent.trim();
+
+  if (!/^\d+$/.test(number)) {
+    document.getElementById("copyMessage").textContent =
+      "Silakan isi nomor rekening yang benar terlebih dahulu.";
+    return;
+  }
+
+  navigator.clipboard.writeText(number)
+    .then(() => {
+      document.getElementById("copyMessage").textContent =
+        "Nomor rekening berhasil disalin.";
+    })
+    .catch(() => {
+      document.getElementById("copyMessage").textContent =
+        "Gagal menyalin. Silakan salin nomor rekening secara manual.";
+    });
+}
+</script>
+
+   <div class="formsection"><div class="sectionhead"><span class="sectionnum">03</span><div><div class="sectiontitle">Dokumen Pendukung</div><div class="sectionnote">Unggah logo sponsor dan bukti transfer/dokumentasi.</div></div></div>
+   <label>Logo Sponsor / Perusahaan *</label><div class="filebox"><input id="logo" type="file" accept="image/png,image/jpeg,image/webp" required><div class="filehint"><span>▧</span><span><b>Format:</b> JPG, PNG, atau WEBP · <b>Maksimal:</b> 5 MB</span></div></div>
+   <label>Bukti Transfer / Dokumentasi *</label><div class="filebox"><input id="proof" type="file" accept="image/png,image/jpeg,image/webp,application/pdf" required><div class="filehint"><span>▧</span><span><b>Format:</b> JPG, PNG, WEBP, atau PDF · <b>Maksimal:</b> 5 MB</span></div></div></div>
+   <div class="formsection"><div class="sectionhead"><span class="sectionnum">04</span><div><div class="sectiontitle">Catatan Tambahan</div><div class="sectionnote">Opsional, jika ada informasi lain yang perlu disampaikan.</div></div></div>
+   <label>Pesan atau Catatan</label><textarea name="notes" maxlength="2000" placeholder="Tuliskan catatan tambahan di sini (opsional)"></textarea></div>
+   <div id="formStatus" class="status hidden" role="status" aria-live="polite"></div>
+   <div class="actions"><button id="submitBtn" class="btn" type="submit">Kirim Data Sponsorship&nbsp; →</button><button class="btn secondary" type="reset">Bersihkan Formulir</button></div>
+  </form>
+  <p class="footnote">Dengan mengirim formulir ini, Anda memastikan informasi yang diberikan sudah benar.<br><strong>ARESTA 2026</strong> · Terima kasih atas dukungan dan kepercayaan Anda.</p>
+ </div>
+</section>
+<section id="adminPage" class="wrap hidden">
+ <header class="hero"><img class="brandlogo" src="./favicon-aresta%20(1).png" alt="Logo Aresta 2026"><div><h1>Database Sponsorship Aresta</h1><p>Panel administrasi · Pengelolaan data sponsor, logo perusahaan, dan bukti transfer.</p></div></header>
+ <div id="loginCard" class="card" style="max-width:430px;margin:28px auto">
+  <h2>Login Admin</h2><p>Masuk untuk mengelola data sponsorship. Akses dibatasi untuk akun admin yang terdaftar.</p>
+  <form id="loginForm"><label>Email admin</label><input id="adminEmail" type="email" autocomplete="username" required><label>Password</label><input id="adminPassword" type="password" autocomplete="current-password" required><div id="loginStatus" class="status hidden"></div><div class="actions"><button class="btn" type="submit">Masuk ke Database</button></div></form>
+ </div>
+ <div id="dashboard" class="hidden">
+  <div class="stats">
+   <div class="stat"><span>Total Sponsor</span><strong id="totalSponsors">0</strong></div>
+   <div class="stat"><span>Total Pembayaran Lunas</span><strong id="totalAmount">Rp 0</strong></div>
+   <div class="stat"><span>Menunggu Pembayaran</span><strong id="pendingCount">0</strong></div>
+   <div class="stat"><span>Pembayaran Lunas</span><strong id="paidCount">0</strong></div>
+   <div class="stat"><span>Data dengan Dua File</span><strong id="totalFiles">0</strong></div>
+  </div>
+  <div class="card"><div class="toolbar">
+   <input id="search" placeholder="Cari sponsor, kontak, paket, atau telepon...">
+   <select id="statusFilter" aria-label="Filter status pembayaran" style="max-width:220px"><option value="all">Semua status pembayaran</option><option value="pending">Pending · Menunggu</option><option value="paid">Paid · Lunas</option><option value="failed">Failed · Gagal</option><option value="expired">Expired · Kedaluwarsa</option></select>
+   <button id="refreshBtn" class="btn">Muat Ulang</button><button id="csvBtn" class="btn secondary">Ekspor CSV</button><button id="logoutBtn" class="btn danger">Keluar</button></div><div id="adminStatus" class="status hidden"></div>
+  <div class="tablewrap"><table><thead><tr><th>No.</th><th>Nama Sponsor</th><th>Penanggung Jawab</th><th>Telepon</th><th>Email</th><th>Paket</th><th>Nominal</th><th>Status Pembayaran</th><th>Ubah Status</th><th>Logo</th><th>Bukti Transfer</th><th>Catatan</th><th>Tanggal</th></tr></thead><tbody id="rows"></tbody></table></div>
+  <p class="small" style="margin-top:14px">File menggunakan signed URL sementara. Jangan bagikan link file kepada orang lain.</p></div>
+ </div>
+</section>
+<script>
+/* LANGKAH WAJIB: isi dua nilai di bawah dari Supabase > Project Settings / Connect.
+   Gunakan Project URL dan publishable key (atau anon key lama). JANGAN gunakan service_role/secret key. */
+const SUPABASE_URL = "https://kfibknrrwndurbyilzrq.supabase.co";
+const SUPABASE_PUBLISHABLE_KEY = "sb_publishable_peIePJn5ncirdbuA7upLOA_MGtMOUQ5";
+const BUCKET = "sponsorship-files";
+const configured = SUPABASE_URL.startsWith("https://") && !SUPABASE_URL.includes("PASTE_") && !SUPABASE_PUBLISHABLE_KEY.includes("PASTE_");
+const db = configured ? window.supabase.createClient(SUPABASE_URL,SUPABASE_PUBLISHABLE_KEY) : null;
+const isAdminPage = new URLSearchParams(location.search).get("page")==="admin";
+document.getElementById("publicPage").classList.toggle("hidden",isAdminPage);
+document.getElementById("adminPage").classList.toggle("hidden",!isAdminPage);
+const rupiah=n=>new Intl.NumberFormat("id-ID",{style:"currency",currency:"IDR",maximumFractionDigits:0}).format(Number(n||0));
+function status(id,msg,error=false){const e=document.getElementById(id);e.textContent=msg;e.classList.remove("hidden","error");if(error)e.classList.add("error")}
+function clearStatus(id){document.getElementById(id).classList.add("hidden")}
+function ready(){if(!db){throw new Error("Aplikasi belum dikonfigurasi. Isi SUPABASE_URL dan SUPABASE_PUBLISHABLE_KEY di file index.html.");}}
+function safeName(s){return String(s||"file").replace(/[^a-zA-Z0-9._-]/g,"_").slice(0,90)}
+async function uploadFile(file,kind){
+ if(!file)throw new Error("Pilih kedua file yang diwajibkan.");
+ if(file.size>5*1024*1024)throw new Error("Ukuran tiap file maksimal 5 MB.");
+ const allowed=kind==="logo"?["image/jpeg","image/png","image/webp"]:["image/jpeg","image/png","image/webp","application/pdf"];
+ if(!allowed.includes(file.type))throw new Error("Jenis file tidak didukung.");
+ const path="submissions/"+crypto.randomUUID()+"-"+safeName(file.name);
+ const {error}=await db.storage.from(BUCKET).upload(path,file,{contentType:file.type,upsert:false});
+ if(error)throw error;
+ return path;
+}
+document.getElementById("sponsorForm").addEventListener("submit",async e=>{
+ e.preventDefault();
+ const btn=document.getElementById("submitBtn");
+ btn.disabled=true;btn.textContent="Mengirim...";
+ let stage="menghubungkan ke Supabase";
+ try{
+  clearStatus("formStatus");ready();
+  const f=e.currentTarget;
+  const amount=Number(String(f.amount.value).replace(/[^\d]/g,""));
+  if(!Number.isSafeInteger(amount)||amount<1)throw new Error("Nominal sponsorship harus berupa angka lebih dari nol.");
+  stage="mengunggah logo sponsor";
+  const logoPath=await uploadFile(document.getElementById("logo").files[0],"logo");
+  stage="mengunggah bukti transfer";
+  const proofPath=await uploadFile(document.getElementById("proof").files[0],"proof");
+  stage="menyimpan data sponsorship";
+  const {error}=await db.from("sponsorships").insert([{
+   company:f.company.value.trim(),contact:f.contact.value.trim(),phone:f.phone.value.trim(),
+   email:f.email.value.trim()||null,package_name:f.package_name.value,amount,
+   logo_path:logoPath,proof_path:proofPath,notes:f.notes.value.trim()||null,payment_status:"pending"
+  }]);
+  if(error)throw error;
+  status("formStatus","Data sponsorship berhasil dikirim. Status pembayaran: PENDING (menunggu verifikasi admin).");
+  f.reset();
+ }catch(err){
+  let msg=err?.message||"Pengiriman gagal. Silakan coba lagi.";
+  if(msg.toLowerCase().includes("failed to fetch")||msg.toLowerCase().includes("networkerror")){
+   msg="Koneksi ke Supabase gagal saat "+stage+". Periksa koneksi internet, pastikan project Supabase aktif, dan cek Project URL. Jika gagal saat unggah file, periksa Storage > Policies untuk bucket '"+BUCKET+"'. Jika gagal saat menyimpan data, periksa Table Editor > sponsorships dan kebijakan RLS.";
+  } else if(/row-level security|permission denied|not allowed|unauthorized/i.test(msg)){
+   msg="Supabase menolak akses saat "+stage+". Periksa kebijakan RLS tabel sponsorships dan Storage Policies bucket '"+BUCKET+"'. Detail: "+msg;
+  }
+  status("formStatus",msg,true);
+ }finally{btn.disabled=false;btn.textContent="Kirim Data Sponsorship →"}
+});
+document.getElementById("loginForm").addEventListener("submit",async e=>{
+ e.preventDefault();try{ready();const {error}=await db.auth.signInWithPassword({email:document.getElementById("adminEmail").value.trim(),password:document.getElementById("adminPassword").value});if(error)throw error;await loadAdmin();}catch(err){status("loginStatus",err.message||"Login gagal.",true)}
+});
+async function requireAdmin(){ready();const {data:{user},error}=await db.auth.getUser();if(error||!user)throw new Error("Sesi login tidak ditemukan. Silakan login kembali.");return user;}
+function normalizedPaymentStatus(value){return ["pending","paid","failed","expired"].includes(String(value||"").toLowerCase())?String(value).toLowerCase():"pending";}
+function paymentLabel(value){
+ const st=normalizedPaymentStatus(value);
+ return st==="paid"?"PAID · Lunas":st==="failed"?"FAILED · Gagal":st==="expired"?"EXPIRED · Kedaluwarsa":"PENDING · Menunggu";
+}
+async function loadAdmin(){
+ try{
+  clearStatus("adminStatus");
+  await requireAdmin();
+  const {data,error}=await db.from("sponsorships").select("*").order("created_at",{ascending:false});
+  if(error)throw error;
+  document.getElementById("loginCard").classList.add("hidden");
+  document.getElementById("dashboard").classList.remove("hidden");
+  document.getElementById("totalSponsors").textContent=data.length;
+  document.getElementById("totalAmount").textContent=rupiah(data.filter(r=>normalizedPaymentStatus(r.payment_status)==="paid").reduce((sum,r)=>sum+Number(r.amount||0),0));
+  document.getElementById("pendingCount").textContent=data.filter(r=>normalizedPaymentStatus(r.payment_status)==="pending").length;
+  document.getElementById("paidCount").textContent=data.filter(r=>normalizedPaymentStatus(r.payment_status)==="paid").length;
+  document.getElementById("totalFiles").textContent=data.filter(r=>r.logo_path&&r.proof_path).length;
+  window.adminRows=data;
+  await renderRows();
+ }catch(err){
+  let msg=err?.message||"Tidak dapat memuat database.";
+  if(msg.toLowerCase().includes("failed to fetch"))msg="Gagal terhubung ke Supabase saat memuat data. Periksa koneksi internet, status project Supabase, Project URL, dan kebijakan RLS tabel sponsorships.";
+  status("adminStatus",msg,true);
+ }
+}
+async function signedLink(path){
+ if(!path)return "";
+ const {data,error}=await db.storage.from(BUCKET).createSignedUrl(path,120);
+ if(error)throw error;
+ return data.signedUrl;
+}
+async function changePaymentStatus(id,nextStatus,button){
+ try{
+  const user=await requireAdmin();
+  if(!user)throw new Error("Silakan login kembali.");
+  if(nextStatus==="paid"&&!confirm("Konfirmasi bahwa pembayaran ini benar-benar sudah diterima?"))return;
+  button.disabled=true;button.textContent="Menyimpan...";
+  const {data,error}=await db.from("sponsorships").update({payment_status:nextStatus}).eq("id",id).select("id,payment_status");
+  if(error)throw error;
+  if(!data||data.length===0)throw new Error("Status tidak berubah. Periksa kebijakan UPDATE/RLS pada tabel sponsorships di Supabase.");
+  status("adminStatus","Status pembayaran berhasil diperbarui menjadi "+paymentLabel(nextStatus)+".");
+  await loadAdmin();
+ }catch(err){
+  let msg=err?.message||"Status pembayaran gagal diperbarui.";
+  if(msg.toLowerCase().includes("failed to fetch"))msg="Tidak dapat terhubung ke Supabase saat mengubah status. Periksa koneksi dan kebijakan UPDATE/RLS tabel sponsorships.";
+  status("adminStatus",msg,true);
+ }finally{button.disabled=false;button.textContent="Simpan Status";}
+}
+async function renderRows(){
+ const q=(document.getElementById("search").value||"").toLowerCase();
+ const selectedStatus=document.getElementById("statusFilter").value;
+ const data=(window.adminRows||[]).filter(r=>{
+  const matchesText=[r.company,r.contact,r.phone,r.email,r.package_name,r.notes].join(" ").toLowerCase().includes(q);
+  return matchesText&&(selectedStatus==="all"||normalizedPaymentStatus(r.payment_status)===selectedStatus);
+ });
+ const tbody=document.getElementById("rows");tbody.replaceChildren();
+ if(!data.length){
+  const tr=document.createElement("tr"),td=document.createElement("td");
+  td.colSpan=13;td.textContent="Tidak ada data sponsorship untuk pencarian/status ini.";
+  tr.appendChild(td);tbody.appendChild(tr);return;
+ }
+ for(let i=0;i<data.length;i++){
+  const r=data[i],tr=document.createElement("tr");
+  [i+1,r.company,r.contact,r.phone,r.email||"",r.package_name,rupiah(r.amount)].forEach(v=>{
+   const td=document.createElement("td");td.textContent=v??"";tr.appendChild(td);
+  });
+  const current=normalizedPaymentStatus(r.payment_status);
+  const statusTd=document.createElement("td"),badge=document.createElement("span");
+  badge.className="status-badge badge-"+current;badge.textContent=paymentLabel(current);statusTd.appendChild(badge);tr.appendChild(statusTd);
+  const editTd=document.createElement("td"),select=document.createElement("select");
+  select.className="status-select";select.setAttribute("aria-label","Ubah status pembayaran");
+  [["pending","Pending · Menunggu"],["paid","Paid · Lunas"],["failed","Failed · Gagal"],["expired","Expired · Kedaluwarsa"]].forEach(([v,label])=>{
+   const o=document.createElement("option");o.value=v;o.textContent=label;o.selected=v===current;select.appendChild(o);
+  });
+  const save=document.createElement("button");save.type="button";save.className="btn save-status";save.textContent="Simpan Status";
+  save.addEventListener("click",()=>changePaymentStatus(r.id,select.value,save));
+  editTd.appendChild(select);editTd.appendChild(document.createElement("br"));editTd.appendChild(save);tr.appendChild(editTd);
+  for(const p of [r.logo_path,r.proof_path]){
+   const td=document.createElement("td");
+   if(p){try{const a=document.createElement("a");a.href=await signedLink(p);a.target="_blank";a.rel="noopener";a.textContent="Buka file";td.appendChild(a)}
+    catch(_){td.textContent="Tidak tersedia"}}
+   else td.textContent="-";
+   tr.appendChild(td);
+  }
+  [r.notes||"",r.created_at?new Date(r.created_at).toLocaleString("id-ID"):"-"].forEach(v=>{
+   const td=document.createElement("td");td.textContent=v;tr.appendChild(td);
+  });
+  tbody.appendChild(tr);
+ }
+}
+document.getElementById("search").addEventListener("input",renderRows);
+document.getElementById("statusFilter").addEventListener("change",renderRows);
+document.getElementById("refreshBtn").addEventListener("click",loadAdmin);
+document.getElementById("logoutBtn").addEventListener("click",async()=>{if(db)await db.auth.signOut();document.getElementById("dashboard").classList.add("hidden");document.getElementById("loginCard").classList.remove("hidden")});
+document.getElementById("csvBtn").addEventListener("click",()=>{const rows=window.adminRows||[];const cols=["created_at","company","contact","phone","email","package_name","amount","payment_status","notes"];const csv=[cols.join(","),...rows.map(r=>cols.map(k=>'"'+String(r[k]??"").replace(/"/g,'""')+'"').join(","))].join("\r\n");const a=document.createElement("a");a.href=URL.createObjectURL(new Blob(["\ufeff"+csv],{type:"text/csv;charset=utf-8"}));a.download="database-sponsorship-aresta.csv";a.click();URL.revokeObjectURL(a.href)});
+if(isAdminPage&&configured){db.auth.getSession().then(({data})=>{if(data.session)loadAdmin()})}
+</script>
+</body></html>
